@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>SignUp Form</title>
+</head>
+<body>
+	<!-- main -->
+	<div class="main-w3layouts wrapper">
+		<h1>SignIn Form</h1>
+        <center><h3 style="color:red">{{msg}}</h3></center>
+			<div>
+				<form action="{% url 'login' %}" method="post">
+                    {% csrf_token %}
+				
+					<input type="email" name="email" placeholder="Email" required="">
+                    
+					<input type="password" name="password" placeholder="Password" required="">
+					
+					<input type="submit" value="SIGNIN">
+				</form>
+				<p>Don't have an Account? <a href="{% url 'registerpage' %}"> Register Now!</a></p>
+			</div>
+	</div>
+	<!-- //main -->
+</body>
+</html>

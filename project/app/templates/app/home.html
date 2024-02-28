@@ -1,0 +1,101 @@
+<center>
+    <!-- <h1>Home Page</h1>
+    Firstname : {{user.fname}}
+    <br>
+    Lastname : {{user.lname}}
+    <br>
+    Email : {{user.email}}
+    <br>
+    Contact : {{user.contact}}
+    <br>
+    Password : {{user.password}} -->
+    <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <input type="submit" value="Log-out">
+    </form>
+    {% if key2 %}
+        <h1>Update Form</h1>
+        <form action="{% url 'update' pk=key2.id %}" method="post">
+            {% csrf_token %}
+            <table>
+                <tr>
+                    <td>Email</td>
+                    <td><input type="email" name="email" value='{{key2.Email}}' required></td>
+                </tr>
+                <tr>
+                    <td>Query</td>
+                    <td><input type="text" name="query" value='{{key2.Query}}' required></td>
+                </tr>
+
+                <tr>
+                    <td><input type="submit" value="Update"></td>
+                </tr>
+            </table>
+        </form>
+
+    {% else %}
+        <h1>Insert Form</h1>
+        <form action="{% url 'query' pk=user.email %}" method="post">
+            {% csrf_token %}
+            <table>
+                <tr>
+                    <td>Email</td>
+                    <td><input type="email" name="email" value='{{user.email}}' readonly required></td>
+                </tr>
+                <tr>
+                    <td>Query</td>
+                    <td><input type="text" name="query" required></td>
+                </tr>
+
+                <tr>
+                    <td><input type="submit" value="Query"></td>
+                </tr>
+            </table>
+        </form>
+    {% endif %}
+    <a href="{% url 'showdata' pk=user.email %}">Show All Data</a>
+    <form action="{% url 'search' pk=user.email %}" method="post">
+        {% csrf_token %}
+        <input type="search" name="search">
+        <button type="submit">Search</button>
+    </form>
+    {% if key1 %}
+    <table border='1'>
+      <thead>
+          <tr>
+            <th>Id</th>
+            <th>Email</th>
+            <th>Query</th>
+            <th>Edit</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        
+        <tbody>
+            {% for i in key1 %}
+            <tr>
+                <td>{{i.id}}</td>
+                <td>{{i.Email}}</td>
+                <td>{{i.Query}}</td>
+                <td>
+                <form action="{% url 'editpage' pk=i.id %}" method="post" name="Editform">
+                    {% csrf_token %}
+                    <input type="submit" value="Edit">
+                </form>
+                </td>
+                <td>
+                <form action="{% url 'delete' pk=i.id %}" method="post" name="Deleteform">
+                    {% csrf_token %}
+                    <input type="submit" value="Delete">
+                </form>
+                </td>
+
+            </tr>
+            {% endfor %}
+        </tbody>
+        
+    </table>
+    {% endif %}
+</center>
+
+

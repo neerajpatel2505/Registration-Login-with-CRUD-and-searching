@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>SignUp Form</title>
+</head>
+<body>
+	<!-- main -->
+	<div class="main-w3layouts wrapper">
+		<h1>SignUp Form</h1>
+        <center><h3 style="color:red">{{msg}}</h3></center>
+		<div class="main-agileinfo">
+			<div class="agileits-top">
+				<form action="{% url 'register' %}" method="post">
+                    {% csrf_token %}
+					<input type="text" name="fname" placeholder="Firstname" required="">
+                    <input type="text" name="lname" placeholder="Lastname" required="">
+					<input type="email" name="email" placeholder="Email" required="">
+                    <input type="text" name="contact" placeholder="Contact" required="">
+					<input type="password" name="password" placeholder="Password" required="">
+					<input type="password" name="cpassword" placeholder="Confirm Password" required="">
+					
+					<input type="submit" value="SIGNUP">
+				</form>
+				<p>Don't have an Account? <a href="{% url 'loginpage' %}"> Login Now!</a></p>
+			</div>
+		</div>
+	</div>
+	<!-- //main -->
+</body>
+</html>
