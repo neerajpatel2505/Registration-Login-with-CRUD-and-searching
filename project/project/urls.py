@@ -15,8 +15,21 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
+from app.views import *
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',include('app.urls'))
-]
+    path("",RegisterPage,name="registerpage"),
+    path("register/",UserRegister,name="register"),
+    path("loginpage/",LoginPage,name="loginpage"),
+    path("loginuser/",LoginUser,name="login"),
+    path("insert/<str:pk>",query,name="query"),
+    path('showpage/<str:pk>',showdata,name='showdata'),
+    path('editpage/<int:pk>/',editPage,name='editpage'),
+    path('update/<int:pk>/',updateData,name='update'),
+    path('delete/<int:pk>/',deleteData,name='delete'),
+    path('search/<str:pk>',search,name='search'),
+    path('logout/',logout,name='logout')
+]+ static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
